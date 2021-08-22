@@ -35,7 +35,7 @@ public class ApplicationUserController {
     ProductsRepository productsRepository;
 
 
-    @GetMapping("/e")
+    @GetMapping("/")
     public String getHome(Principal p, Model model) {
         try {
             model.addAttribute("UserInfo", applicationUserRepository.findById(applicationUserRepository.findByUsername(p.getName()).getId()).get());
