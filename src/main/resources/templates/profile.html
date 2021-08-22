@@ -1,0 +1,169 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org" xmlns:sec="http://www.w3.org/1999/xhtml">
+<head>
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <link rel="stylesheet" th:href="@{/css/normalize.css}">
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.1.0/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-KyZXEAg3QhqLMpG8r+8fhAXLRk2vvoC2f3B09zVXn8CA5QIVfZOJ3BCsw2P0p/We" crossorigin="anonymous">
+  <link th:href="@{/css/style.css}" rel="stylesheet" />
+  <script src="https://kit.fontawesome.com/9e5d1913ca.js" crossorigin="anonymous"></script>
+  <title>Document</title>
+</head>
+<body>
+<!-- start navbar -->
+<nav th:replace="fragments/navbar :: navbar"></nav>
+<!-- end navbar -->
+<div class="profile">
+  <div class="background-img">
+  </div>
+  <div class="all-container mb-5 pb-5">
+    <div class="container">
+      <div class="row">
+        <div class="col h-100">
+          <div class="left-side">
+            <img th:src="@{${UserInfo.imgUrl}}" />
+            <h1 th:text="${UserInfo.firstName} + ' '+${UserInfo.lastName}"></h1>
+            <h2 th:text="${UserInfo.username}"></h2>
+            <p th:text="${UserInfo.bio}"></p>
+          </div>
+          <div class="left-side">
+            <h1>Add new product </h1>
+            <div class="addedProduct" >  <a href="#" data-toggle="modal" data-target="#exampleModal1" ><i class="fas fa-plus"></i> </a> </div>
+
+          </div>
+        </div>
+        <div class="col-8 h-100">
+          <div class="right-side">
+            <div class="header-info pb-4">
+              <h1>Personal Details</h1>
+              <a href="#" data-toggle="modal" data-target="#exampleModal">
+                <i class="fas fa-edit"></i> Edit
+              </a>
+            </div>
+            <div class="row">
+              <div class="col-3 "><p>First Name</p></div>
+              <div class="col" th:text="${UserInfo.firstName}"></div>
+            </div>
+            <div class="row">
+              <div class="col-3"><p>Last Name </p></div>
+              <div class="col" th:text="${UserInfo.lastName}"></div>
+            </div>
+            <div class="row">
+              <div class="col-3"><p>Date of Birth</p></div>
+              <div class="col"><p th:text="${UserInfo.dateOfBirth}"></p></div>
+            </div>
+            <div class="row">
+              <div class="col-3"><p>Email</p></div>
+              <div class="col"><p th:text="${UserInfo.username}"></p></div>
+            </div>
+            <div class="row">
+              <div class="col-3"><p>Bio</p></div>
+              <div class="col"><p th:text="${UserInfo.bio}"></p></div>
+            </div>
+          </div>
+        </div>
+
+
+      </div>
+    </div>
+
+  </div>
+
+</div>
+<!-- Modal -->
+<div class="modal fade" id="exampleModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+  <div class="modal-dialog" role="document">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h5 class="modal-title" id="exampleModalLabel">Edit your info </h5>
+        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+          <span aria-hidden="true">&times;</span>
+        </button>
+      </div>
+      <div class="modal-body">
+        <form  th:action="@{/editUser}" method="post"
+              enctype="multipart/form-data">
+          <div class="mb-3">
+            <label for="username" class="form-label">Email</label>
+            <input type="email" name="username" class="form-control" id="username" aria-describedby="emailHelp">
+          </div>
+
+          <div class="mb-3">
+            <label for="password" class="form-label">Password</label>
+            <input name="password" type="password" class="form-control" id="password">
+          </div>
+          <div class="mb-3">
+            <label for="firstName" class="form-label">firstName</label>
+            <input type="text" name="firstName" class="form-control"  th:value="${UserInfo.firstName}" id="firstName" aria-describedby="emailHelp">
+          </div>
+
+          <div class="mb-3">
+            <label for="lastName" class="form-label">lastName</label>
+            <input type="text" name="lastName" class="form-control" th:value="${UserInfo.lastName}" id="lastName" aria-describedby="emailHelp">
+          </div>
+
+          <div class="mb-3">
+            <label for="dateOfBirth" class="form-label">dateOfBirth</label>
+            <input type="date" name="dateOfBirth" class="form-control" id="dateOfBirth" th:value="${UserInfo.dateOfBirth}" aria-describedby="emailHelp">
+          </div>
+
+          <div class="mb-3">
+            <label for="bio" class="form-label">bio</label>
+            <input type="text" name="bio" class="form-control" id="bio" th:value="${UserInfo.bio}" aria-describedby="emailHelp">
+          </div>
+
+
+          <div class="mb-3">
+            <label for="imageUrl" class="form-label">imageUrl</label>
+            <input type="file" name="imageUrl" class="form-control" id="imageUrl" th:value="${UserInfo.imgUrl}" aria-describedby="emailHelp">
+          </div>
+
+
+
+          <div class="modal-footer">
+            <button type="submit" class="btn  btn-outline-info my-btn">Submit</button>
+          </div>
+        </form>
+      </div>
+
+    </div>
+  </div>
+</div>
+<!--    end modal-->
+<!--Start product Modal -->
+<div class="modal fade" id="exampleModal1" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+  <div class="modal-dialog" role="document">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h5 class="modal-title" id="exampleModalLabel">Edit your info </h5>
+        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+          <span aria-hidden="true">&times;</span>
+        </button>
+      </div>
+      <div class="modal-body">
+        <form th:action="@{/product/{id}(id=${UserInfo.getId()})}"  method="post">
+<!--          <p><input type='hidden' name='userId' th:value="${userId}"></p>-->
+
+          <h1>product Name <input type="text" field="*{productName}"  name="productName" /></h1>
+          <p> product Image<input type="productImageUrl" field="*{productImageUrl}" name="productImageUrl" /></p>
+          <p> time <input type="date"  field="*{time}" name="time" /></p>
+          <p> minPrice(in JOD)<input type="text" field="*{minPrice}" name="minPrice" /></p>
+
+          <input type="submit" value="submit">
+        </form>
+      </div>
+
+    </div>
+  </div>
+</div>
+<!--    end product modal-->
+<!-- start footer -->
+<nav th:replace="fragments/navbar :: footer"></nav>
+<!-- end footer -->
+
+<script src="https://code.jquery.com/jquery-3.5.1.slim.min.js" integrity="sha384-DfXdz2htPH0lsSSs5nCTpuj/zy4C+OGpamoFVy38MVBnE+IbbVYUew+OrCXaRkfj" crossorigin="anonymous"></script>
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@4.5.3/dist/js/bootstrap.bundle.min.js" integrity="sha384-ho+j7jyWK8fNQe+A12Hb8AhRq26LrZ/JpcUGGOn+Y7RsweNrtN/tE3MoK7ZeZDyx" crossorigin="anonymous"></script>
+<script th:src="@{/js.js}"></script>
+</body>
+</html>
