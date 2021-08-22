@@ -22,7 +22,7 @@ import org.springframework.stereotype.*;
 @SpringBootApplication
 public class AuctionApplication {
 
-	@RequestMapping("/")
+	@RequestMapping("/e")
 	@ResponseBody
 	String home() {
 		return "Hello World!";
