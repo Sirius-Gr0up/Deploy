@@ -18,11 +18,11 @@ import org.springframework.boot.autoconfigure.SpringBootApplication;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.stereotype.*;
 
-//@Controller
+@Controller
 @SpringBootApplication
 public class AuctionApplication {
 
-//	@RequestMapping("/")
+	@RequestMapping("/")
 	@ResponseBody
 	String home() {
 		return "Hello World!";
