@@ -35,18 +35,26 @@ public class ApplicationUserController {
     ProductsRepository productsRepository;
 
 
+
     @GetMapping("/")
-    public String getHome(Principal p, Model model) {
-        try {
-            model.addAttribute("UserInfo", applicationUserRepository.findById(applicationUserRepository.findByUsername(p.getName()).getId()).get());
-            System.out.println(applicationUserRepository.findByUsername(p.getName()).getImgUrl());
-        } catch (NullPointerException e) {
+    public String getHome() {
 
-            model.addAttribute("userInfo", "");
-
-        }
-        return "index.html";
+        return "SS.html";
     }
+
+
+//    @GetMapping("/")
+//    public String getHome(Principal p, Model model) {
+//        try {
+//            model.addAttribute("UserInfo", applicationUserRepository.findById(applicationUserRepository.findByUsername(p.getName()).getId()).get());
+//            System.out.println(applicationUserRepository.findByUsername(p.getName()).getImgUrl());
+//        } catch (NullPointerException e) {
+//
+//            model.addAttribute("userInfo", "");
+//
+//        }
+//        return "index.html";
+//    }
 
     @GetMapping("/signup")
     public String getSignUpPage() {
